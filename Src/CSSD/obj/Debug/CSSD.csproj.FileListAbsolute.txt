@@ -1,0 +1,9 @@
+C:\Users\Lenovo\source\repos\CSSD\CSSD\obj\Debug\CSSD.csprojResolveAssemblyReference.cache
+C:\Users\Lenovo\source\repos\CSSD\CSSD\obj\Debug\CSSD.frm_main.resources
+C:\Users\Lenovo\source\repos\CSSD\CSSD\obj\Debug\CSSD.Properties.Resources.resources
+C:\Users\Lenovo\source\repos\CSSD\CSSD\obj\Debug\CSSD.csproj.GenerateResource.cache
+C:\Users\Lenovo\source\repos\CSSD\CSSD\obj\Debug\CSSD.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\source\repos\CSSD\CSSD\bin\Debug\CSSD.exe
+C:\Users\Lenovo\source\repos\CSSD\CSSD\bin\Debug\CSSD.pdb
+C:\Users\Lenovo\source\repos\CSSD\CSSD\obj\Debug\CSSD.exe
+C:\Users\Lenovo\source\repos\CSSD\CSSD\obj\Debug\CSSD.pdb
