@@ -58,6 +58,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frm_exportExcel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_exportExcel.Designer.cs">
+      <DependentUpon>frm_exportExcel.cs</DependentUpon>
+    </Compile>
     <Compile Include="frm_main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frm_exportExcel.resx">
+      <DependentUpon>frm_exportExcel.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_main.resx">
       <DependentUpon>frm_main.cs</DependentUpon>
     </EmbeddedResource>
