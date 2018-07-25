@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Data.OleDb;
 
@@ -12,10 +8,11 @@ namespace CSSD
 {
     public partial class frm_main : Form
     {
-        private static string DBPath = "C:\\Users\\Lenovo\\Desktop\\CSSDBase.mdb";
+        private static string DBPath = System.Environment.CurrentDirectory + "\\CSSDBase.mdb";
         private static string constr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=";
         BindingSource mybdsource = new BindingSource();
         private int saveValue;
+        private int rule = 0;
 
         public frm_main()
         {
@@ -27,7 +24,8 @@ namespace CSSD
             OleDbConnection conn = new OleDbConnection(constr + DBPath);
             conn.Open();
             string sqlstr = "select r.ID as 记录号,d.keshiming as 科室,r.part as 包和器械,count as 数量,s.guigeming as 规格,recordTime as 记录时间 "
-            + "from(tb_record r left join tb_dept d on r.deptId= d.ID)left join tb_spec s on r.specId=s.ID";
+            + "from(tb_record r left join tb_dept d on r.deptId= d.ID)left join tb_spec s on r.specId=s.ID "
+            + "where recordTime between #" + dtp_begin.Text.Trim() + "# and #" + dtp_end.Text.Trim() + "#";
             OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
@@ -61,6 +59,7 @@ namespace CSSD
 
         private void frm_main_Load(object sender, EventArgs e)
         {
+            this.dtp_begin.Value = DateTime.Now.AddDays(-3);//显示最近3天的记录
             this.init();
             txb_recordNo.DataBindings.Add("text", mybdsource, "记录号");
             cmb_name.DataBindings.Add("text", mybdsource, "科室");
@@ -69,8 +68,10 @@ namespace CSSD
             cmb_spec.DataBindings.Add("text", mybdsource, "规格");
             dtp_opDate.DataBindings.Add("text", mybdsource, "记录时间");
             this.addDept();
-            this.addPackage();
+            this.addPart();
             this.addSpec();
+            this.addRules();
+            this.保存SToolStripButton.Enabled = false;
             this.setFalse();
         }
 
@@ -93,7 +94,7 @@ namespace CSSD
             //cmb_name.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
-        private void addPackage()
+        private void addPart()
         {
             //添加包和器械
             OleDbConnection conn = new OleDbConnection(constr + DBPath);
@@ -109,8 +110,8 @@ namespace CSSD
             }
             cmb_pack.SelectedIndex = 0;
             conn.Close();
-            //cmb_pack.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            //cmb_pack.AutoCompleteSource = AutoCompleteSource.ListItems;
+            cmb_pack.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cmb_pack.AutoCompleteSource = AutoCompleteSource.ListItems;
         }
 
         private void addSpec()
@@ -130,9 +131,21 @@ namespace CSSD
             conn.Close();
         }
 
+        private void addRules()
+        {
+            //添加排列规则
+            this.cmb_rules.Items.Add("按时间排列");
+            this.cmb_rules.Items.Add("按科室排列");
+            this.cmb_rules.SelectedIndex = 0;
+        }
+
         private void 新增ToolStripButton_Click(object sender, EventArgs e)
         {
             this.setTrue();
+            this.dataGridView1.Enabled = false;
+            this.删除ToolStripButton.Enabled = false;
+            this.修改ToolStripButton.Enabled = false;
+            this.保存SToolStripButton.Enabled = true;
             cmb_name.SelectedIndex = 0;
             cmb_pack.SelectedIndex = 0;
             cmb_spec.SelectedIndex = 0;
@@ -143,6 +156,10 @@ namespace CSSD
         private void 修改ToolStripButton_Click(object sender, EventArgs e)
         {
             this.setTrue();
+            this.dataGridView1.Enabled = false;
+            this.删除ToolStripButton.Enabled = false;
+            this.新增ToolStripButton.Enabled = false;
+            this.保存SToolStripButton.Enabled = true;
             saveValue = 2;
         }
 
@@ -182,12 +199,22 @@ namespace CSSD
                 MessageBox.Show("请选择要删除的记录！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             this.setFalse();
-            this.init();
+            dtp_end.Value = DateTime.Now;
+            if (rule == 0)
+            {
+                this.init();
+            }
+            else
+            {
+                this.deptRule();
+            }
+            dataGridView1.Focus();
         }
 
         private void 保存SToolStripButton_Click(object sender, EventArgs e)
         {
             int rowAffected = 0;
+            this.dtp_opDate.Value = DateTime.Now;
             if (saveValue == 1)
             {
                 //新增记录
@@ -258,18 +285,111 @@ namespace CSSD
                     }
                 }
             }
-            this.init();
+            dtp_end.Value = DateTime.Now;
+            if (rule == 0)
+            {
+                this.init();
+            }
+            else
+            {
+                this.deptRule();
+            }
+            this.新增ToolStripButton.Enabled = true;
+            this.修改ToolStripButton.Enabled = true;
+            this.删除ToolStripButton.Enabled = true;
+            this.保存SToolStripButton.Enabled = false;
+            this.dataGridView1.Enabled = true;
+            dataGridView1.Focus();
+        }
+
+        public static int DataGridViewToExcel(DataGridView dgv)
+        {
+            try
+            {
+                //没有数据的话就不往下执行  
+                if (dgv.Rows.Count == 0)
+                    return 0;
+
+                //实例化一个Excel.Application对象  
+                Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+                excel.UserControl = false;
+                Microsoft.Office.Interop.Excel.Workbook wb = (Microsoft.Office.Interop.Excel.Workbook)excel.Workbooks.Add(System.Reflection.Missing.Value);
+
+                //让后台执行设置为不可见 
+                excel.Visible = false;
+
+                //生成Excel中列头名称  
+                for (int i = 0; i < dgv.Columns.Count; i++)
+                {
+                    if (dgv.Columns[i].Visible == true)
+                    {
+                        excel.Cells[1, i + 1] = dgv.Columns[i].HeaderText;
+                    }
+                }
+
+                //把DataGridView当前页的数据保存在Excel中  
+                for (int i = 0; i < dgv.Rows.Count - 1; i++)
+                {
+                    System.Windows.Forms.Application.DoEvents();
+                    for (int j = 0; j < dgv.Columns.Count; j++)
+                    {
+                        if (dgv.Columns[j].Visible == true)
+                        {
+                            if (dgv[j, i].ValueType == typeof(string))
+                            {
+                                excel.Cells[i + 2, j + 1] = "'" + dgv[j, i].Value.ToString();
+                            }
+                            else
+                            {
+                                excel.Cells[i + 2, j + 1] = dgv[j, i].Value.ToString();
+                            }
+                        }
+                    }
+                }
+
+                //设置禁止弹出保存和覆盖的询问提示框  
+                excel.DisplayAlerts = false;
+                excel.AlertBeforeOverwriting = false;
+
+                //保存工作簿  
+                wb.Saved = true;
+
+                //保存excel文件  
+                string dir = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                excel.ActiveWorkbook.SaveCopyAs(dir + "\\CSSD工作记录表" + DateTime.Now.ToString("yyyy.MM.dd") + ".xlsx");
+
+                //确保Excel进程关闭  
+                excel.Quit();
+                excel = null;
+                System.GC.Collect();
+                return 1;
+                //MessageBox.Show("文件导出成功！", "信息提示");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "错误提示");
+                return 0;
+            }
         }
 
         private void 导出EtoolStripButton_Click(object sender, EventArgs e)
         {
-            frm_exportExcel frm = new frm_exportExcel();
-            frm.Show();
+            backgroundWorker1.RunWorkerAsync();
+            int result = DataGridViewToExcel(dataGridView1);
+            if (result == 1)
+            {
+                MessageBox.Show("数据导出成功，文件已保存至桌面！");
+                toolStripProgressBar1.Value = 0;
+            }
+            else
+            {
+                MessageBox.Show("数据导出失败！");
+            }
         }
 
         private void cmb_pack_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (rtxb_qixie.Text != "")
+            if (rtxb_qixie.Text != "" && cmb_pack.Text != "")
             {
                 rtxb_qixie.Text += "、" + cmb_pack.Text;
             }
@@ -278,5 +398,80 @@ namespace CSSD
                 rtxb_qixie.Text += cmb_pack.Text;
             }
         }
+
+        private void dtp_begin_ValueChanged(object sender, EventArgs e)
+        {
+            if (rule == 0)
+            {
+                this.init();
+            }
+            else
+            {
+                this.deptRule();
+            }
+        }
+
+        private void dtp_end_ValueChanged(object sender, EventArgs e)
+        {
+            if (rule == 0)
+            {
+                this.init();
+            }
+            else
+            {
+                this.deptRule();
+            }
+        }
+
+        private void deptRule()
+        {
+            OleDbConnection conn = new OleDbConnection(constr + DBPath);
+            conn.Open();
+            string sqlstr = "select r.ID as 记录号,d.keshiming as 科室,r.part as 包和器械,count as 数量,s.guigeming as 规格,recordTime as 记录时间 "
+            + "from(tb_record r left join tb_dept d on r.deptId= d.ID)left join tb_spec s on r.specId=s.ID "
+            + "where recordTime between #" + dtp_begin.Text.Trim() + "# and #" + dtp_end.Text.Trim() + "# "
+            + "order by d.keshiming";
+            OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, conn);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            conn.Close();
+            mybdsource.DataSource = ds.Tables[0];
+            this.dataGridView1.DataSource = mybdsource;
+            this.bindingNavigator1.BindingSource = mybdsource;
+        }
+
+        private void cmb_rules_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmb_rules.SelectedIndex == 0)
+            {
+                rule = 0;
+                this.init();
+            }
+            else
+            {
+                rule = 1;
+                this.deptRule();
+            }
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 0; i < 1000; i++)
+            {
+                this.backgroundWorker1.ReportProgress(i / 10, i);
+            }
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            this.toolStripProgressBar1.Value = e.ProgressPercentage;
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            //this.toolStripProgressBar1.Value = 100;
+            BackgroundWorker worker = sender as BackgroundWorker;
+        }
+
     }
 }
