@@ -384,6 +384,7 @@ namespace CSSD
             else
             {
                 MessageBox.Show("数据导出失败！");
+                toolStripProgressBar1.Value = 0;
             }
         }
 
@@ -393,7 +394,7 @@ namespace CSSD
             {
                 rtxb_qixie.Text += "、" + cmb_pack.Text;
             }
-            else
+            else if(cmb_pack.Text != "")
             {
                 rtxb_qixie.Text += cmb_pack.Text;
             }
@@ -473,5 +474,11 @@ namespace CSSD
             BackgroundWorker worker = sender as BackgroundWorker;
         }
 
+        private void 清除toolStripButton_Click(object sender, EventArgs e)
+        {
+            frm_clear f = new frm_clear();
+            f.ShowDialog();
+            this.init();
+        }
     }
 }

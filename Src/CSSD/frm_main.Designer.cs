@@ -71,6 +71,8 @@
             this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
             this.导出EtoolStripButton = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.清除toolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -279,7 +281,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 92);
+            this.label8.Location = new System.Drawing.Point(29, 92);
             this.label8.Margin = new System.Windows.Forms.Padding(8, 0, 8, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(163, 30);
@@ -350,7 +352,9 @@
             this.toolStripSeparator1,
             this.保存SToolStripButton,
             this.toolStripProgressBar1,
-            this.导出EtoolStripButton});
+            this.导出EtoolStripButton,
+            this.toolStripSeparator2,
+            this.清除toolStripButton});
             this.bindingNavigator1.Location = new System.Drawing.Point(0, 0);
             this.bindingNavigator1.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.bindingNavigator1.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -477,7 +481,8 @@
             // 
             this.toolStripProgressBar1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(100, 45);
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(120, 45);
+            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // 导出EtoolStripButton
             // 
@@ -497,6 +502,23 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // 清除toolStripButton
+            // 
+            this.清除toolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.清除toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("清除toolStripButton.Image")));
+            this.清除toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.清除toolStripButton.Name = "清除toolStripButton";
+            this.清除toolStripButton.Size = new System.Drawing.Size(161, 45);
+            this.清除toolStripButton.Text = "清除数据";
+            this.清除toolStripButton.ToolTipText = "清除数据";
+            this.清除toolStripButton.Click += new System.EventHandler(this.清除toolStripButton_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 48);
+            // 
             // frm_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
@@ -508,7 +530,7 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "frm_main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "福建中医药大学附属第三人民医院";
+            this.Text = "消毒供应中心登记系统";
             this.Load += new System.EventHandler(this.frm_main_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -566,5 +588,7 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ToolStripProgressBar toolStripProgressBar1;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripButton 清除toolStripButton;
     }
 }

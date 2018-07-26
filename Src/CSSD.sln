@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27428.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSSD", "CSSD\CSSD.csproj", "{40FE97AD-8136-4EA3-8E9D-1420B5FB4F01}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup1", "Setup1\Setup1.vdproj", "{15EECB05-E49B-4000-BA62-80F159C03C84}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +27,6 @@ Global
 		{40FE97AD-8136-4EA3-8E9D-1420B5FB4F01}.Release|x64.Build.0 = Release|Any CPU
 		{40FE97AD-8136-4EA3-8E9D-1420B5FB4F01}.Release|x86.ActiveCfg = Release|Any CPU
 		{40FE97AD-8136-4EA3-8E9D-1420B5FB4F01}.Release|x86.Build.0 = Release|Any CPU
-		{15EECB05-E49B-4000-BA62-80F159C03C84}.Debug|Any CPU.ActiveCfg = Debug
-		{15EECB05-E49B-4000-BA62-80F159C03C84}.Debug|x64.ActiveCfg = Debug
-		{15EECB05-E49B-4000-BA62-80F159C03C84}.Debug|x86.ActiveCfg = Debug
-		{15EECB05-E49B-4000-BA62-80F159C03C84}.Release|Any CPU.ActiveCfg = Release
-		{15EECB05-E49B-4000-BA62-80F159C03C84}.Release|x64.ActiveCfg = Release
-		{15EECB05-E49B-4000-BA62-80F159C03C84}.Release|x86.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
