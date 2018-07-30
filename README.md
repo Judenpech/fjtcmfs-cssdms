@@ -51,7 +51,7 @@
 
 **1、新增记录**
 ![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/add1.jpg)
-![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/add2.jpg)
+![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/add2.png)
 
 - 功能说明：通过在右侧“记录信息”栏输入记录信息，新增一条记录。
 - 操作说明：
@@ -74,7 +74,7 @@
   - 【包/器械选择框】中输入包/器械的首字即可完成自动填充，选择的包/器械会自动加入至下方文本框中，文本框中的内容可自由编辑。
 
 **4、清除数据**
-![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/clear.jpg)
+![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/clear.png)
 
 - 功能说明：清除数据库中的所有记录信息。该操作需要输入密码以确认操作，密码为：123456。
 - 操作说明：
@@ -90,8 +90,8 @@
   - 表格默认显示最近三天的记录，排列方式默认为“按时间排列”。
 
 **6、包/器械管理**
-![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/manage1.jpg.png)
-![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/manage2.jpg.png)
+![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/manage1.png)
+![](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/Img/manage2.png)
 
 - 功能说明：添加或删除包/器械。
 - 操作说明：
@@ -102,8 +102,9 @@
  
 ## 四、下载
 
-[Download CSSDMS v1.0.0](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/App/CSSDMS-v1.0.0.zip)
-[Download CSSDMS v1.0.1](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/App/CSSDMS-v1.0.1.zip)
+- [Download CSSDMS v1.0.0](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/App/CSSDMS-v1.0.0.zip)
+
+- [Download CSSDMS v1.0.1](https://github.com/jl223vy/fjtcmfs-cssdms/raw/master/App/CSSDMS-v1.0.1.zip)
 
 
 ## 五、最后
