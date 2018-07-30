@@ -19,3 +19,4 @@ C:\Users\Lenovo\Documents\GitHub\fjtcmfs-cssdms\Src\CSSD\obj\Debug\CSSD.csproj.R
 C:\Users\Lenovo\Documents\GitHub\fjtcmfs-cssdms\Src\CSSD\bin\Debug\CSSD.exe.config
 C:\Users\Lenovo\Documents\GitHub\fjtcmfs-cssdms\Src\CSSD\obj\Debug\CSSD.csprojResolveAssemblyReference.cache
 C:\Users\Lenovo\Documents\GitHub\fjtcmfs-cssdms\Src\CSSD\obj\Debug\CSSD.frm_clear.resources
+C:\Users\Lenovo\Documents\GitHub\fjtcmfs-cssdms\Src\CSSD\obj\Debug\CSSD.frm_addInst.resources

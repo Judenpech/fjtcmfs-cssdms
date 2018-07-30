@@ -476,9 +476,17 @@ namespace CSSD
 
         private void 清除toolStripButton_Click(object sender, EventArgs e)
         {
-            frm_clear f = new frm_clear();
-            f.ShowDialog();
+            frm_clear frm = new frm_clear();
+            frm.ShowDialog();
             this.init();
+        }
+
+        private void 添加器械toolStripButton_Click(object sender, EventArgs e)
+        {
+            frm_addInst frm = new frm_addInst();
+            frm.ShowDialog();
+            this.cmb_pack.Items.Clear();
+            this.addPart();
         }
     }
 }
