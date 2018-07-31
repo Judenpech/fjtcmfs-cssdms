@@ -51,15 +51,13 @@ namespace CSSD
                     comm.CommandText = str1;
                     if (comm.ExecuteNonQuery() < 0)
                     {
-                        MessageBox.Show("111");
                         throw new Exception();
                     }
-                    
+
                     string str2 = "alter table tb_record alter column ID counter(1,1)";
                     comm.CommandText = str2; ;
                     if (comm.ExecuteNonQuery() < 0)
                     {
-                        MessageBox.Show("222");
                         throw new Exception();
                     }
 
