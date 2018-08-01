@@ -12,7 +12,6 @@ namespace CSSD
         private static string constr = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=";
         BindingSource mybdsource = new BindingSource();
         private int saveValue;
-        private int rule = 0;
 
         public frm_main()
         {
@@ -59,14 +58,19 @@ namespace CSSD
 
         private void frm_main_Load(object sender, EventArgs e)
         {
-            this.dtp_begin.Value = DateTime.Now.AddDays(-3);//显示最近3天的记录
+            //显示最近7天的记录
+            this.dtp_begin.Value = DateTime.Now.AddDays(-7);
+
             this.init();
+
+            //绑定数据源
             txb_recordNo.DataBindings.Add("text", mybdsource, "记录号");
             cmb_name.DataBindings.Add("text", mybdsource, "科室");
             rtxb_qixie.DataBindings.Add("text", mybdsource, "包和器械");
             txb_count.DataBindings.Add("text", mybdsource, "数量");
             cmb_spec.DataBindings.Add("text", mybdsource, "规格");
             dtp_opDate.DataBindings.Add("text", mybdsource, "记录时间");
+
             this.addDept();
             this.addPart();
             this.addSpec();
@@ -133,9 +137,9 @@ namespace CSSD
 
         private void addRules()
         {
-            //添加排列规则
-            this.cmb_rules.Items.Add("按时间排列");
-            this.cmb_rules.Items.Add("按科室排列");
+            //添加导出格式
+            this.cmb_rules.Items.Add("记录明细");
+            this.cmb_rules.Items.Add("记录汇总");
             this.cmb_rules.SelectedIndex = 0;
         }
 
@@ -150,7 +154,6 @@ namespace CSSD
             cmb_pack.SelectedIndex = 0;
             cmb_spec.SelectedIndex = 0;
             saveValue = 1;
-
         }
 
         private void 修改ToolStripButton_Click(object sender, EventArgs e)
@@ -200,14 +203,7 @@ namespace CSSD
             }
             this.setFalse();
             dtp_end.Value = DateTime.Now;
-            if (rule == 0)
-            {
-                this.init();
-            }
-            else
-            {
-                this.deptRule();
-            }
+            this.init();
             dataGridView1.Focus();
         }
 
@@ -286,14 +282,7 @@ namespace CSSD
                 }
             }
             dtp_end.Value = DateTime.Now;
-            if (rule == 0)
-            {
-                this.init();
-            }
-            else
-            {
-                this.deptRule();
-            }
+            this.init();
             this.新增ToolStripButton.Enabled = true;
             this.修改ToolStripButton.Enabled = true;
             this.删除ToolStripButton.Enabled = true;
@@ -390,11 +379,12 @@ namespace CSSD
 
         private void cmb_pack_SelectedIndexChanged(object sender, EventArgs e)
         {
+            //选择包或器械
             if (rtxb_qixie.Text != "" && cmb_pack.Text != "")
             {
                 rtxb_qixie.Text += "、" + cmb_pack.Text;
             }
-            else if(cmb_pack.Text != "")
+            else if (cmb_pack.Text != "")
             {
                 rtxb_qixie.Text += cmb_pack.Text;
             }
@@ -402,56 +392,45 @@ namespace CSSD
 
         private void dtp_begin_ValueChanged(object sender, EventArgs e)
         {
-            if (rule == 0)
-            {
-                this.init();
-            }
-            else
-            {
-                this.deptRule();
-            }
+            this.init();
         }
 
         private void dtp_end_ValueChanged(object sender, EventArgs e)
         {
-            if (rule == 0)
-            {
-                this.init();
-            }
-            else
-            {
-                this.deptRule();
-            }
+            this.init();
         }
 
-        private void deptRule()
+        private void totalRule()
         {
+            //记录汇总
             OleDbConnection conn = new OleDbConnection(constr + DBPath);
             conn.Open();
-            string sqlstr = "select r.ID as 记录号,d.keshiming as 科室,r.part as 包和器械,count as 数量,s.guigeming as 规格,recordTime as 记录时间 "
+            string sqlstr = "select d.keshiming as 科室,r.part as 包和器械,sum([count]) as 数量,s.guigeming as 规格 "
             + "from(tb_record r left join tb_dept d on r.deptId= d.ID)left join tb_spec s on r.specId=s.ID "
             + "where recordTime between #" + dtp_begin.Text.Trim() + "# and #" + dtp_end.Text.Trim() + "# "
-            + "order by d.keshiming";
+            + "group by d.keshiming,r.part,s.guigeming";
             OleDbDataAdapter da = new OleDbDataAdapter(sqlstr, conn);
             DataSet ds = new DataSet();
             da.Fill(ds);
             conn.Close();
-            mybdsource.DataSource = ds.Tables[0];
-            this.dataGridView1.DataSource = mybdsource;
-            this.bindingNavigator1.BindingSource = mybdsource;
+            this.dataGridView1.DataSource = ds.Tables[0];
         }
 
         private void cmb_rules_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cmb_rules.SelectedIndex == 0)
             {
-                rule = 0;
                 this.init();
+                this.新增ToolStripButton.Enabled = true;
+                this.修改ToolStripButton.Enabled = true;
+                this.删除ToolStripButton.Enabled = true;
             }
             else
             {
-                rule = 1;
-                this.deptRule();
+                this.totalRule();
+                this.新增ToolStripButton.Enabled = false;
+                this.修改ToolStripButton.Enabled = false;
+                this.删除ToolStripButton.Enabled = false;
             }
         }
 
@@ -488,5 +467,6 @@ namespace CSSD
             this.cmb_pack.Items.Clear();
             this.addPart();
         }
+
     }
 }

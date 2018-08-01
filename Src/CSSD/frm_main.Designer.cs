@@ -29,6 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_main));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,6 +58,13 @@
             this.bindingNavigator1 = new System.Windows.Forms.BindingNavigator(this.components);
             this.新增ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorCountItem = new System.Windows.Forms.ToolStripLabel();
+            this.导出EtoolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.清除toolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.添加器械toolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.bindingNavigatorMoveFirstItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMovePreviousItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator = new System.Windows.Forms.ToolStripSeparator();
@@ -64,18 +73,11 @@
             this.bindingNavigatorMoveNextItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorMoveLastItem = new System.Windows.Forms.ToolStripButton();
             this.bindingNavigatorSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.删除ToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.修改ToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.保存SToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripProgressBar1 = new System.Windows.Forms.ToolStripProgressBar();
-            this.导出EtoolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.清除toolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.修改ToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.删除ToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.添加器械toolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -89,7 +91,23 @@
             this.dataGridView1.AllowUserToResizeRows = false;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.Location = new System.Drawing.Point(17, 15);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.dataGridView1.Name = "dataGridView1";
@@ -313,11 +331,12 @@
             // cmb_rules
             // 
             this.cmb_rules.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmb_rules.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.cmb_rules.FormattingEnabled = true;
             this.cmb_rules.Location = new System.Drawing.Point(190, 273);
             this.cmb_rules.Margin = new System.Windows.Forms.Padding(8, 9, 8, 9);
             this.cmb_rules.Name = "cmb_rules";
-            this.cmb_rules.Size = new System.Drawing.Size(372, 38);
+            this.cmb_rules.Size = new System.Drawing.Size(372, 43);
             this.cmb_rules.TabIndex = 106;
             this.cmb_rules.SelectedIndexChanged += new System.EventHandler(this.cmb_rules_SelectedIndexChanged);
             // 
@@ -329,7 +348,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(163, 30);
             this.label9.TabIndex = 113;
-            this.label9.Text = "排列方式：";
+            this.label9.Text = "导出格式：";
             // 
             // label3
             // 
@@ -401,6 +420,56 @@
             this.bindingNavigatorCountItem.Text = "/ {0}";
             this.bindingNavigatorCountItem.ToolTipText = "总项数";
             // 
+            // 导出EtoolStripButton
+            // 
+            this.导出EtoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("导出EtoolStripButton.Image")));
+            this.导出EtoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.导出EtoolStripButton.Name = "导出EtoolStripButton";
+            this.导出EtoolStripButton.Size = new System.Drawing.Size(198, 50);
+            this.导出EtoolStripButton.Text = "导出Excel";
+            this.导出EtoolStripButton.ToolTipText = "导出Excel";
+            this.导出EtoolStripButton.Click += new System.EventHandler(this.导出EtoolStripButton_Click);
+            // 
+            // toolStripProgressBar1
+            // 
+            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
+            this.toolStripProgressBar1.Size = new System.Drawing.Size(120, 50);
+            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 53);
+            // 
+            // 清除toolStripButton
+            // 
+            this.清除toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("清除toolStripButton.Image")));
+            this.清除toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.清除toolStripButton.Name = "清除toolStripButton";
+            this.清除toolStripButton.Size = new System.Drawing.Size(184, 50);
+            this.清除toolStripButton.Text = "清除记录";
+            this.清除toolStripButton.ToolTipText = "清除数据";
+            this.清除toolStripButton.Click += new System.EventHandler(this.清除toolStripButton_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 53);
+            // 
+            // 添加器械toolStripButton
+            // 
+            this.添加器械toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("添加器械toolStripButton.Image")));
+            this.添加器械toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.添加器械toolStripButton.Name = "添加器械toolStripButton";
+            this.添加器械toolStripButton.Size = new System.Drawing.Size(234, 50);
+            this.添加器械toolStripButton.Text = "包/器械管理";
+            this.添加器械toolStripButton.Click += new System.EventHandler(this.添加器械toolStripButton_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 53);
+            // 
             // bindingNavigatorMoveFirstItem
             // 
             this.bindingNavigatorMoveFirstItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -462,16 +531,21 @@
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
             this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 53);
             // 
-            // 删除ToolStripButton
+            // 保存SToolStripButton
             // 
-            this.删除ToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.删除ToolStripButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.删除ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("删除ToolStripButton.Image")));
-            this.删除ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.删除ToolStripButton.Name = "删除ToolStripButton";
-            this.删除ToolStripButton.Size = new System.Drawing.Size(114, 50);
-            this.删除ToolStripButton.Text = "删除";
-            this.删除ToolStripButton.Click += new System.EventHandler(this.删除ToolStripButton_Click);
+            this.保存SToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.保存SToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("保存SToolStripButton.Image")));
+            this.保存SToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.保存SToolStripButton.Name = "保存SToolStripButton";
+            this.保存SToolStripButton.Size = new System.Drawing.Size(114, 50);
+            this.保存SToolStripButton.Text = "保存";
+            this.保存SToolStripButton.Click += new System.EventHandler(this.保存SToolStripButton_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 53);
             // 
             // 修改ToolStripButton
             // 
@@ -483,52 +557,16 @@
             this.修改ToolStripButton.Text = "修改";
             this.修改ToolStripButton.Click += new System.EventHandler(this.修改ToolStripButton_Click);
             // 
-            // toolStripSeparator1
+            // 删除ToolStripButton
             // 
-            this.toolStripSeparator1.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 53);
-            // 
-            // 保存SToolStripButton
-            // 
-            this.保存SToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.保存SToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("保存SToolStripButton.Image")));
-            this.保存SToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.保存SToolStripButton.Name = "保存SToolStripButton";
-            this.保存SToolStripButton.Size = new System.Drawing.Size(114, 50);
-            this.保存SToolStripButton.Text = "保存";
-            this.保存SToolStripButton.Click += new System.EventHandler(this.保存SToolStripButton_Click);
-            // 
-            // toolStripProgressBar1
-            // 
-            this.toolStripProgressBar1.Name = "toolStripProgressBar1";
-            this.toolStripProgressBar1.Size = new System.Drawing.Size(120, 50);
-            this.toolStripProgressBar1.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            // 
-            // 导出EtoolStripButton
-            // 
-            this.导出EtoolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("导出EtoolStripButton.Image")));
-            this.导出EtoolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.导出EtoolStripButton.Name = "导出EtoolStripButton";
-            this.导出EtoolStripButton.Size = new System.Drawing.Size(198, 50);
-            this.导出EtoolStripButton.Text = "导出Excel";
-            this.导出EtoolStripButton.ToolTipText = "导出Excel";
-            this.导出EtoolStripButton.Click += new System.EventHandler(this.导出EtoolStripButton_Click);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 53);
-            // 
-            // 清除toolStripButton
-            // 
-            this.清除toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("清除toolStripButton.Image")));
-            this.清除toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.清除toolStripButton.Name = "清除toolStripButton";
-            this.清除toolStripButton.Size = new System.Drawing.Size(184, 50);
-            this.清除toolStripButton.Text = "清除记录";
-            this.清除toolStripButton.ToolTipText = "清除数据";
-            this.清除toolStripButton.Click += new System.EventHandler(this.清除toolStripButton_Click);
+            this.删除ToolStripButton.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.删除ToolStripButton.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.删除ToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("删除ToolStripButton.Image")));
+            this.删除ToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.删除ToolStripButton.Name = "删除ToolStripButton";
+            this.删除ToolStripButton.Size = new System.Drawing.Size(114, 50);
+            this.删除ToolStripButton.Text = "删除";
+            this.删除ToolStripButton.Click += new System.EventHandler(this.删除ToolStripButton_Click);
             // 
             // backgroundWorker1
             // 
@@ -537,31 +575,12 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // 添加器械toolStripButton
-            // 
-            this.添加器械toolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("添加器械toolStripButton.Image")));
-            this.添加器械toolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.添加器械toolStripButton.Name = "添加器械toolStripButton";
-            this.添加器械toolStripButton.Size = new System.Drawing.Size(234, 50);
-            this.添加器械toolStripButton.Text = "包/器械管理";
-            this.添加器械toolStripButton.Click += new System.EventHandler(this.添加器械toolStripButton_Click);
-            // 
-            // toolStripSeparator3
-            // 
-            this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 53);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 53);
-            // 
             // frm_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(2198, 1311);
+            this.ClientSize = new System.Drawing.Size(2198, 1462);
             this.Controls.Add(this.bindingNavigator1);
             this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
